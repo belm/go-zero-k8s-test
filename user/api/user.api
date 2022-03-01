@@ -1,0 +1,16 @@
+syntax = "v1"
+
+type GetInfoRequest {
+	Uid int64 `path:"uid"`
+}
+
+type GetInfoResponse {
+	Uid      int64  `form:"uid"`
+	Username string `form:"username"`
+	Age      int64  `form:"age"`
+}
+
+service user {
+	@handler getinfo
+	get /user/getinfo/:uid (GetInfoRequest) returns (GetInfoResponse)
+}
