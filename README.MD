@@ -59,3 +59,26 @@ http://{你的节点公网IP}:30880
 我这里直接使用KubeSphere启动redis，并且新建服务， redis-svc 监听6379端口
 
 etcd配置环境变量  ALLOW_NONE_AUTHENTICATION=yes
+
+## helm管理
+
+~/.kube/config
+
+下载k8s配置， 开启远程访问，配置ip白名单
+
+```shell
+kubectl config get-contexts
+
+kubectl config use-context cls-6t9xg7wx-394356779-context-default
+
+kubectl get services
+kubectl get pods
+
+yum install helm
+helm list
+helm repo list
+helm repo add tkemarket https://market-tke.tencentcloudcr.com/chartrepo/opensource-stable
+
+helm serach hub nginx
+helm install myweb bitnami/nginx -n default
+```
