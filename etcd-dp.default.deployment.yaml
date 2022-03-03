@@ -1,0 +1,53 @@
+﻿kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: etcd-dp
+  namespace: default
+  labels:
+    app: etcd-dp
+  annotations:
+    deployment.kubernetes.io/revision: '2'
+    kubesphere.io/creator: admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: etcd-dp
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: etcd-dp
+    spec:
+      containers:
+        - name: container-svzan9
+          image: 'bitnami/etcd:latest'
+          ports:
+            - name: tcp-2379
+              containerPort: 2379
+              protocol: TCP
+            - name: tcp-2380
+              containerPort: 2380
+              protocol: TCP
+          env:
+            - name: ALLOW_NONE_AUTHENTICATION
+              value: 'yes'
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      serviceAccountName: default
+      serviceAccount: default
+      securityContext: {}
+      affinity: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

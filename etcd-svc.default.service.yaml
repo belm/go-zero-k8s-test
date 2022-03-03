@@ -1,0 +1,24 @@
+﻿kind: Service
+apiVersion: v1
+metadata:
+  name: etcd-svc
+  namespace: default
+  labels:
+    app: etcd-svc
+  annotations:
+    kubesphere.io/creator: admin
+spec:
+  ports:
+    - name: tcp-2379
+      protocol: TCP
+      port: 2379
+      targetPort: 2379
+      nodePort: 32677
+  selector:
+    app: etcd-dp
+  clusterIP: 172.16.253.149
+  clusterIPs:
+    - 172.16.253.149
+  type: NodePort
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
