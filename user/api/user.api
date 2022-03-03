@@ -1,16 +1,15 @@
 syntax = "v1"
 
-type GetInfoRequest {
-	Uid int64 `path:"uid"`
+type ADDRequest {
+	A int64 `form:"a"`
+	B int64 `form:"b"`
 }
 
-type GetInfoResponse {
-	Uid      int64  `form:"uid"`
-	Username string `form:"username"`
-	Age      int64  `form:"age"`
+type AddResponse {
+	Sum int64 `json:"sum"`
 }
 
-service user {
-	@handler getinfo
-	get /user/getinfo/:uid (GetInfoRequest) returns (GetInfoResponse)
+service User {
+	@handler Add
+	get /user/add (ADDRequest) returns (AddResponse)
 }

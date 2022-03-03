@@ -9,16 +9,16 @@ import (
 	"go-zero-k8s-test/user/api/internal/types"
 )
 
-func getinfoHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func AddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.GetInfoRequest
+		var req types.ADDRequest
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.Error(w, err)
 			return
 		}
 
-		l := logic.NewGetinfoLogic(r.Context(), svcCtx)
-		resp, err := l.Getinfo(req)
+		l := logic.NewAddLogic(r.Context(), svcCtx)
+		resp, err := l.Add(req)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package user;
+option go_package = "./userpb";
+
+message AddReq {
+  int64 A = 1;
+  int64 B = 2;
+}
+
+message AddResp {
+  int64 Sum = 1;
+}
+
+service User {
+  rpc Add(AddReq) returns (AddResp);
+}
