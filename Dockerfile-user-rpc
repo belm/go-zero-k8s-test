@@ -12,8 +12,8 @@ ADD go.mod .
 ADD go.sum .
 RUN go mod download
 COPY . .
-COPY user/api/etc/user.yaml /app/etc/user.yaml
-RUN go build -ldflags="-s -w" -o /app/user user/api/user.go
+COPY user/rpc/etc/user.yaml /app/etc/user.yaml
+RUN go build -ldflags="-s -w" -o /app/user user/rpc/user.go
 
 
 FROM alpine
