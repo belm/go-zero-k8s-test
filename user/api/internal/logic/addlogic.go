@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"go-zero-k8s-test/user/rpc/user"
 
 	"go-zero-k8s-test/user/api/internal/svc"
 	"go-zero-k8s-test/user/api/internal/types"
@@ -23,8 +24,17 @@ func NewAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) AddLogic {
 	}
 }
 
-func (l *AddLogic) Add(req types.ADDRequest) (resp *types.AddResponse, err error) {
-	// todo: add your logic here and delete this line
+func (l *AddLogic) Add(req types.AddRequest) (resp *types.AddResponse, err error) {
+	rsp, err := l.svcCtx.UserRpc.Add(l.ctx, &user.AddReq{
+		A: req.A,
+		B: req.B,
+	})
 
-	return
+	if err != nil {
+		return nil,err
+	}
+
+	return &types.AddResponse{
+		Sum: rsp.Sum,
+	},nil
 }

@@ -24,7 +24,9 @@ func NewAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AddLogic {
 }
 
 func (l *AddLogic) Add(in *userpb.AddReq) (*userpb.AddResp, error) {
-	// todo: add your logic here and delete this line
+	sum := in.A + in.B
 
-	return &userpb.AddResp{}, nil
+	return &userpb.AddResp{
+		Sum: sum,
+	}, nil
 }

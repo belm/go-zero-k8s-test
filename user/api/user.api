@@ -1,6 +1,6 @@
 syntax = "v1"
 
-type ADDRequest {
+type AddRequest {
 	A int64 `form:"a"`
 	B int64 `form:"b"`
 }
@@ -11,5 +11,5 @@ type AddResponse {
 
 service User {
 	@handler Add
-	get /user/add (ADDRequest) returns (AddResponse)
+	get /user/add (AddRequest) returns (AddResponse)
 }
